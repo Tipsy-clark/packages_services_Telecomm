@@ -5,8 +5,6 @@ include $(CLEAR_VARS)
 
 LOCAL_JAVA_LIBRARIES := telephony-common
 
-LOCAL_STATIC_JAVA_LIBRARIES := libSudaSdk
-
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_SRC_FILES += \
         src/org/codeaurora/btmultisim/IBluetoothDsdaService.aidl

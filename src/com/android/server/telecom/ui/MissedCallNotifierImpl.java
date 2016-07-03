@@ -61,10 +61,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Locale;
 
-import com.sudamod.sdk.phonelocation.PhoneUtil;
-import android.suda.utils.SudaUtils;
-
-
 // TODO: Needed for move to system service: import com.android.internal.R;
 
 /**
@@ -332,19 +328,14 @@ public class MissedCallNotifierImpl extends CallsManagerListenerBase implements 
             }
         }
 
-        CharSequence location = "";
-        if (SudaUtils.isSupportLanguage(true)) {
-            location = PhoneUtil.getPhoneUtil(mContext).getLocalNumberInfo(call.getPhoneNumber());
-        }
-
         if (!TextUtils.isEmpty(name) && TextUtils.isGraphic(name)) {
-            return !TextUtils.isEmpty(location) ? name + " " + location : name;
+            return name;
         } else if (!TextUtils.isEmpty(handle)) {
             // A handle should always be displayed LTR using {@link BidiFormatter} regardless of the
             // content of the rest of the notification.
             // TODO: Does this apply to SIP addresses?
             BidiFormatter bidiFormatter = BidiFormatter.getInstance();
-            return !TextUtils.isEmpty(location) ? bidiFormatter.unicodeWrap(handle, TextDirectionHeuristics.LTR) + " " + location : bidiFormatter.unicodeWrap(handle, TextDirectionHeuristics.LTR);
+            return bidiFormatter.unicodeWrap(handle, TextDirectionHeuristics.LTR);
         } else {
             // Use "unknown" if the call is unidentifiable.
             return mContext.getString(R.string.unknown);
