@@ -2391,7 +2391,7 @@ public class CallsManager extends Call.ListenerBase implements VideoProviderProx
     }
 
     protected boolean isCallBlacklisted(Call c) {
-        final String number = c.getCallerInfo().phoneNumber;
+        final String number = c.getNumber();
         // See if the number is in the blacklist
         // Result is one of: MATCH_NONE, MATCH_LIST or MATCH_REGEX
         int listType = BlacklistUtils.isListed(mContext, number, BlacklistUtils.BLOCK_CALLS);
